@@ -1,13 +1,9 @@
-<div class="container-fluid p-0">
+<app-header (emitSelectedLink)="navigateTo($event)"></app-header>
+<div class="container">
   <div class="row">
-    <app-header></app-header>
+    <div class="col-md-12">
+      <app-recipes *ngIf="isRecipeActive()"></app-recipes>
+      <app-shopping-list *ngIf="isShoppingListActive()"></app-shopping-list>
+    </div>
   </div>
-  <main class="p-4 row gx-5">
-    <div class="col-md-7 col-xs-7">
-      <app-recipe></app-recipe>
-    </div>
-    <div class="col-md-5 col-xs-5">
-      <app-booking></app-booking>
-    </div>
-  </main>
 </div>

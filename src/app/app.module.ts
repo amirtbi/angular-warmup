@@ -1,25 +1,39 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AppComponent } from './app.component';
-import { BookingComponent } from './Shopping/booking.component';
-import { RecipeComponent } from './Recipe/recipe.component';
-import { BaseHeaderComponent } from './BaseHeader/baseheader.component';
-import { RecipeListComponent } from './Recipe/recipe-list/recipe-list.component';
-import { RecipeDetailComponent } from './Recipe/recipe-detail/recipe-detail.component';
-import { ShoppingEditComponent } from './Shopping/shopping-edit/shopping-edit.component';
-import { RecipeItemComponent } from './Recipe/recipe-list/recipe-item/recipe-item.component';
 
+import { AppComponent } from './app.component';
+import { HeaderComponent } from './header/header.component';
+import { RecipesComponent } from './recipes/recipes.component';
+import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
+import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
+import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
+import { ShoppingListComponent } from './shopping-list/shopping-list.component';
+import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
+import { AppBasicHighLightDirective } from './directives/app.highlight.directive';
+import { BasicTextLength } from './directives/app.calculateStringText.directive';
+import { BetterHighLight } from './directives/app.better-highlight.directive';
+import { AddTextDirective } from './directives/app.add-text.directive';
+import { InputValidatorDirective } from './directives/validator.directive';
+import { appUnlessDirective } from './directives/appUnless.directive';
+import { DropDownDirective } from './directives/dropdown.directive';
 @NgModule({
   declarations: [
     AppComponent,
-    RecipeItemComponent,
-    RecipeComponent,
-    BaseHeaderComponent,
-    BookingComponent,
+    HeaderComponent,
+    RecipesComponent,
     RecipeListComponent,
     RecipeDetailComponent,
+    RecipeItemComponent,
+    ShoppingListComponent,
     ShoppingEditComponent,
+    AppBasicHighLightDirective,
+    BasicTextLength,
+    AddTextDirective,
+    appUnlessDirective,
+    InputValidatorDirective,
+    BetterHighLight,
+    DropDownDirective,
   ],
   imports: [BrowserModule, FormsModule],
   providers: [],

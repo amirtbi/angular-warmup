@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-xs-10">
+    <app-shopping-edit
+      (emitAddedIngredients)="addIngredient($event)"
+    ></app-shopping-edit>
+    <hr />
+    <ul class="list-group">
+      <a
+        class="list-group-item"
+        [ngClass]="{
+          lastItem: i === ingredients.length - 1,
+          oldItem: i !== ingredients.length - 1
+        }"
+        style="cursor: pointer"
+        *ngFor="let ingredient of ingredients; index as i"
+      >
+        {{ ingredient.name }} ({{ ingredient.amount }})
+      </a>
+    </ul>
+    <p BasicHighlightDirective>Style me with directive</p>
+    <p BasicTextLength>Check my length</p>
+    <p betterHighlight="pink">Better highlight approach</p>
+    <p addText>10</p>
+    <div *appUnless="ingredients.length > 2">
+      <p>Custom structural directive</p>
+    </div>
+    <div [ngSwitch]="value">
+      <p *ngSwitchCase="10">value is 10</p>
+      <p *ngSwitchCase="20">value is 20</p>
+    </div>
+  </div>
+</div>
