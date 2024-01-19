@@ -1,0 +1,11 @@
+<div class="col-md-12">
+  <div class="row p-2">
+    <div *ngFor="let recipe of recipes" class="col-md-3 my-2">
+      <app-recipe
+        [title]="recipe.title"
+        [id]="recipe.id"
+        [image]="recipe.image"
+      ></app-recipe>
+    </div>
+  </div>
+</div>
