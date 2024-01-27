@@ -1,0 +1,11 @@
+<div class="col-md-12">
+  <div *ngFor="let recipe of similarRecipes" class="col-md-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ recipe.title }}</h5>
+
+        <a [href]="recipe.sourceUrl" class="btn btn-primary">Go to source</a>
+      </div>
+    </div>
+  </div>
+</div>

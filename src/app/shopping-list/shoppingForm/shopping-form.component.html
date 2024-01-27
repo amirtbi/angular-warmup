@@ -1,0 +1,27 @@
+<h2>Add your ingredient</h2>
+<div>
+  <div class="mb-3">
+    <label for="Item" class="form-label">Item</label>
+    <textarea
+      [(ngModel)]="title"
+      class="form-control"
+      id="Item"
+      rows="3"
+    ></textarea>
+  </div>
+  <div class="mb-3">
+    <label for="Aisle" class="form-label">Aisle</label>
+    <input
+      [(ngModel)]="aisle"
+      type="text"
+      class="form-control"
+      id="Aisle"
+      placeholder="Aisle input placeholder"
+    />
+  </div>
+  <div class="col-md-6">
+    <button (click)="addToShoppingList()" class="btn btn-primary btn-block">
+      Add
+    </button>
+  </div>
+</div>

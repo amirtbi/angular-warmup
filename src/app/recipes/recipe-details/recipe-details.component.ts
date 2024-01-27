@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Route } from '@angular/router';
+import {
+  ActivatedRoute,
+  Params,
+  Route,
+  Router,
+  RouterStateSnapshot,
+} from '@angular/router';
 import { RecipeService } from 'src/app/shared/recipes.service';
 @Component({
   selector: 'app-recipe-details',
@@ -9,9 +15,18 @@ import { RecipeService } from 'src/app/shared/recipes.service';
 export class RecipeDetailsComponent implements OnInit {
   foundRecipe: any;
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private recipeService: RecipeService
   ) {}
+
+  findSimilar() {
+    console.warn('found', this.foundRecipe);
+    this.router.navigate(['similar'], {
+      relativeTo: this.route,
+      queryParams: { id: this.foundRecipe.id },
+    });
+  }
   ngOnInit(): void {
     this.route.params.subscribe((param: Params) => {
       const id = param['id'];

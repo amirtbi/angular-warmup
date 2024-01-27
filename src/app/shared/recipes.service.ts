@@ -6,7 +6,7 @@ import { ApiService } from './api.shared.service';
 export class RecipeService {
   private urlRecipes = 'recipes/complexSearch';
   private urlRecipeInfo = '/recipes';
-  private newRecipe = 'mealplanner/dsky/shopping-list/items';
+
   constructor(private apiService: ApiService) {}
   getRecipes() {
     return this.apiService.getHttp(this.urlRecipes);
@@ -18,11 +18,7 @@ export class RecipeService {
     );
   }
 
-  defineRecipe(recipe: { title: string }) {
-    return this.apiService.postHttp(this.newRecipe, {
-      item: '1 package baking powder',
-      aisle: 'Baking',
-      parse: true,
-    });
+  findSimilarRecipe(recipeId: string) {
+    return this.apiService.getHttp(`recipes/${recipeId}/similar`);
   }
 }

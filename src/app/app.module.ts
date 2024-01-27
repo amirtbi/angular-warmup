@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -6,18 +7,26 @@ import { HeaderComponent } from './header/header.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { RecipeComponent } from './recipes/recipe/recipe.component';
 import { RecipeDetailsComponent } from './recipes/recipe-details/recipe-details.component';
-import { RecipeFormComponent } from './recipes/add-recipe/add-recipe.component';
+import { RecipeSimilarComponent } from './recipes/similar-recipe/similar-recipe.component';
+import { ShoppingListComponent } from './shopping-list/shopping-list.component';
+import { ShoppingFormComponent } from './shopping-list/shoppingForm/shopping-form.component';
+import { ShoppingListItems } from './shopping-list/shopping-list-items/shopping-list-items.component';
+import { HomeComponent } from './home/home.component';
 import { AppRouteModules } from './app.route.module';
 @NgModule({
   declarations: [
     AppComponent,
+    ShoppingFormComponent,
+    ShoppingListItems,
+    HomeComponent,
+    ShoppingListComponent,
     HeaderComponent,
-    RecipeFormComponent,
+    RecipeSimilarComponent,
     RecipesComponent,
     RecipeComponent,
     RecipeDetailsComponent,
   ],
-  imports: [BrowserModule, HttpClientModule, AppRouteModules],
+  imports: [BrowserModule, HttpClientModule, AppRouteModules, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

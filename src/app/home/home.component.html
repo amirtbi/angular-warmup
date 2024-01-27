@@ -1,0 +1,19 @@
+<div class="row">
+  status:{{ getLogStatus() }}
+  <div class="col-md-12 p-4">
+    <button
+      (click)="logIn()"
+      class="btn btn-primary mx-2"
+      [disabled]="getLogStatus()"
+    >
+      Login
+    </button>
+    <button
+      (click)="logOut()"
+      class="btn btn-outline-primary"
+      [disabled]="!getLogStatus()"
+    >
+      Logout
+    </button>
+  </div>
+</div>
