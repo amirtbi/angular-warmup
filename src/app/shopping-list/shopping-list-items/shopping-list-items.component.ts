@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Params } from '@angular/router';
 import { ShoppingService } from 'src/app/shared/shopping.service';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'shopping-items',
   templateUrl: './shopping-items.component.html',
@@ -7,7 +9,10 @@ import { ShoppingService } from 'src/app/shared/shopping.service';
 export class ShoppingListItems implements OnInit {
   shoppingList: any[] = [];
   totalCost = 0;
-  constructor(private shoppingService: ShoppingService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private shoppingService: ShoppingService
+  ) {}
 
   getTotalCost() {
     return this.totalCost;
@@ -30,8 +35,8 @@ export class ShoppingListItems implements OnInit {
     });
   }
   ngOnInit(): void {
-    this.shoppingService.getShoppingList().subscribe((data: any) => {
-      const { aisles, cost: totalCost, endData, startData } = data;
+    this.route.data.subscribe(({ items }) => {
+      const { aisles, cost: totalCost, endData, startData } = items;
       this.totalCost = totalCost;
       for (const item of aisles) {
         let totalCost = 0;
@@ -44,5 +49,8 @@ export class ShoppingListItems implements OnInit {
         });
       }
     });
+    // this.shoppingService.getShoppingList().subscribe((data: any) => {
+
+    // });
   }
 }

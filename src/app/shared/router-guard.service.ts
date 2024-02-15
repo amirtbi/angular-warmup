@@ -1,5 +1,4 @@
 import {
-  ActivatedRoute,
   ActivatedRouteSnapshot,
   CanActivateFn,
   RouterStateSnapshot,
@@ -19,5 +18,4 @@ export const canActivateRoute: CanActivateFn = (
     return true;
   }
   return router.createUrlTree(['/home']);
-  //   return router.navigate(['/home']);
 };

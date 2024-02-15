@@ -7,6 +7,8 @@ import { ShoppingListItems } from './shopping-list/shopping-list-items/shopping-
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { HomeComponent } from './home/home.component';
 import { canActivateRoute } from './shared/router-guard.service';
+import { resolveRecipeDetail } from './recipes/recipe-details/recipe.details.resolver';
+import { shoppingListItemsResolver } from './shopping-list/shopping-list-items/shopping-list-items.resolver';
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
@@ -14,6 +16,7 @@ const appRoutes: Routes = [
   {
     path: 'recipe-detail/:id',
     component: RecipeDetailsComponent,
+    resolve: { details: resolveRecipeDetail },
     children: [{ path: 'similar', component: RecipeSimilarComponent }],
   },
   { path: 'similar-recipe', component: RecipeSimilarComponent },
@@ -21,7 +24,13 @@ const appRoutes: Routes = [
     path: 'shopping-list',
     component: ShoppingListComponent,
     canActivate: [canActivateRoute],
-    children: [{ path: 'items', component: ShoppingListItems }],
+    resolve: { items: shoppingListItemsResolver },
+    children: [
+      {
+        path: 'items',
+        component: ShoppingListItems,
+      },
+    ],
   },
 ];
 

@@ -21,18 +21,20 @@ export class RecipeDetailsComponent implements OnInit {
   ) {}
 
   findSimilar() {
-    console.warn('found', this.foundRecipe);
     this.router.navigate(['similar'], {
       relativeTo: this.route,
       queryParams: { id: this.foundRecipe.id },
     });
   }
   ngOnInit(): void {
-    this.route.params.subscribe((param: Params) => {
-      const id = param['id'];
-      this.recipeService.getRecipeInformation(+id).subscribe((data: any) => {
-        this.foundRecipe = data;
-      });
+    this.route.data.subscribe((param: Params) => {
+      this.foundRecipe = param['details'];
     });
+    // this.route.params.subscribe((param: Params) => {
+    //   const id = param['id'];
+    //   this.recipeService.getRecipeInformation(+id).subscribe((data: any) => {
+    //     this.foundRecipe = data;
+    //   });
+    // });
   }
 }

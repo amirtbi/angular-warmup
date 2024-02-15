@@ -11,11 +11,7 @@ export class RecipeComponent {
   @Input('image') imgPath: string = '';
   @Input('id') id: number = 0;
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private recipeService: RecipeService
-  ) {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   showDetail(recipeId: number) {
     this.router.navigate(['/recipe-detail', recipeId], {
