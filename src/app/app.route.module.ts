@@ -9,9 +9,15 @@ import { HomeComponent } from './home/home.component';
 import { canActivateRoute } from './shared/router-guard.service';
 import { resolveRecipeDetail } from './recipes/recipe-details/recipe.details.resolver';
 import { shoppingListItemsResolver } from './shopping-list/shopping-list-items/shopping-list-items.resolver';
+import { NewRecipeFormComponent } from './recipes/new-recipe/recipe.form.component';
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
+  {
+    path: 'add-recipe',
+    component: NewRecipeFormComponent,
+    canActivate: [canActivateRoute],
+  },
   { path: 'recipes', component: RecipesComponent },
   {
     path: 'recipe-detail/:id',

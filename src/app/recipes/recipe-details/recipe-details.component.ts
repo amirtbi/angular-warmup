@@ -6,6 +6,7 @@ import {
   Router,
   RouterStateSnapshot,
 } from '@angular/router';
+import { ApiService } from 'src/app/shared/api.shared.service';
 import { RecipeService } from 'src/app/shared/recipes.service';
 @Component({
   selector: 'app-recipe-details',
@@ -17,7 +18,8 @@ export class RecipeDetailsComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private recipeService: RecipeService
+    private recipeService: RecipeService,
+    private apiService: ApiService
   ) {}
 
   findSimilar() {
@@ -29,6 +31,7 @@ export class RecipeDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.route.data.subscribe((param: Params) => {
       this.foundRecipe = param['details'];
+      this.apiService.fetchStatus.next('Fetched');
     });
     // this.route.params.subscribe((param: Params) => {
     //   const id = param['id'];

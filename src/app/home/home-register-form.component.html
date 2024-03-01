@@ -1,0 +1,164 @@
+<div class="row justify-content-center">
+  <div class="col-md-8 d-flex justify-content-center">
+    <div class="shadow-lg mt-4 col-md-8 col-sm-12 p-4">
+      <div class="my-2">
+        <h4>Register user</h4>
+        <form [formGroup]="registerUserForm" class="p-4">
+          <span class="text-danger" *ngIf="!formIsCorrect"
+            >Please Fill the form with correct data</span
+          >
+          <div formGroupName="userData">
+            <div class="row mb-3">
+              <label for="emailInput" class="col-sm-2 col-form-label"
+                >Username</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="emailInput"
+                  formControlName="username"
+                />
+              </div>
+              <small
+                class="text-danger"
+                *ngIf="
+                  !registerUserForm.get('userData.username')?.valid &&
+                  registerUserForm.get('userData.username')?.touched
+                "
+                ><span
+                  *ngIf="
+                    registerUserForm.get('userData.username')?.errors?.[
+                      'required'
+                    ]
+                  "
+                  >This field is required</span
+                >
+                <span
+                  *ngIf="registerUserForm.get('userData.username')?.errors?.['spaceNotAllowed']"
+                  >Space not allowed!.</span
+                >
+              </small>
+            </div>
+            <div class="row mb-3">
+              <label for="fNameInput" class="col-sm-2 col-form-label"
+                >Firstname</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="fNameInput"
+                  formControlName="firstname"
+                />
+              </div>
+              <small
+                class="text-danger"
+                *ngIf="
+                  !registerUserForm.get('userData.firstname')?.valid &&
+                  registerUserForm.get('userData.firstname')?.touched
+                "
+                >Please check your firstname</small
+              >
+            </div>
+            <div class="row mb-3">
+              <label for="inputPassword3" class="col-sm-2 col-form-label"
+                >Lastname</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputPassword3"
+                  formControlName="lastname"
+                />
+              </div>
+              <small
+                class="text-danger"
+                *ngIf="
+                  !registerUserForm.get('userData.lastname')?.valid &&
+                  registerUserForm.get('userData.lastname')?.touched
+                "
+                >Please check your lastname</small
+              >
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label for="emailInput" class="col-sm-2 col-form-label"
+              >Email</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="email"
+                class="form-control"
+                id="emailInput"
+                formControlName="email"
+              />
+            </div>
+            <small
+              class="text-danger"
+              *ngIf="
+                !registerUserForm.get('email')?.valid &&
+                registerUserForm.get('email')?.touched
+              "
+            >
+              <span *ngIf="registerUserForm.get('email')?.errors?.['required']"
+                >Email is required</span
+              >
+              <span
+                *ngIf="registerUserForm.get('email')?.errors?.['emailPatternDismatch']"
+                >Email Pattern is not matched</span
+              >
+            </small>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-12 d-flex gap-3" formGroupName="address">
+              <div class="col-md-6">
+                <label for="inputStreet" class="form-label">Street</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputStreet"
+                  formControlName="street"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="inputCity" class="form-label">City</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputCity"
+                  formControlName="city"
+                />
+              </div>
+            </div>
+            <small class="text-danger" *ngIf="addressIsNotValid()">
+              Check your address entered values.
+            </small>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-4">
+              <button class="btn btn-outline-secondary" (click)="addHobby()">
+                Add Hobbies
+              </button>
+            </div>
+
+            <div formArrayName="hobbies">
+              <div
+                class="form-group"
+                *ngFor="let hobbyField of hobbies().controls; let i = index"
+              >
+                <input class="form-control" [formControlName]="i" type="text" />
+              </div>
+            </div>
+          </div>
+          <hr />
+          <button type="submit" (click)="submitForm()" class="btn btn-primary">
+            Register
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

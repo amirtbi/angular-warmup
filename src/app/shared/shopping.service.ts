@@ -19,7 +19,6 @@ export class ShoppingService {
 
   getShoppingList() {
     const { username, hash } = this.apiService.getUserinfo();
-    console.warn('listenning...');
     return this.apiService.getHttp(
       `mealplanner/${username}/${this.urlAddToShoppingList}?hash=${hash}`
     );

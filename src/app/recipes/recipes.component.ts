@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../shared/recipes.service';
+import { ApiService } from '../shared/api.shared.service';
 @Component({
   selector: 'app-recipes',
   templateUrl: './recipes.component.html',
@@ -8,7 +9,10 @@ import { RecipeService } from '../shared/recipes.service';
 export class RecipesComponent implements OnInit {
   recipes: { title: string; image: string; id: number }[] = [];
 
-  constructor(private recipeService: RecipeService) {}
+  constructor(
+    private recipeService: RecipeService,
+    private apiService: ApiService
+  ) {}
 
   customColumn() {
     const recipesLength = this.recipes.length;
@@ -18,7 +22,7 @@ export class RecipesComponent implements OnInit {
   ngOnInit(): void {
     this.recipeService.getRecipes().subscribe((data: any) => {
       this.recipes = data['results'];
-      console.warn('Recipes', this.recipes);
+      this.apiService.fetchStatus.next('Fetched');
     });
   }
 }
