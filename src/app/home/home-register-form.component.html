@@ -58,7 +58,10 @@
                   !registerUserForm.get('userData.firstname')?.valid &&
                   registerUserForm.get('userData.firstname')?.touched
                 "
-                >Please check your firstname</small
+                >
+                <span *ngIf="registerUserForm.get('userData.firstname')?.errors?.['required'];else lengthValidator">This field is requried.</span>
+                  <ng-template #lengthValidator>Firstname length must be larger than 3 chars.</ng-template>
+                </small
               >
             </div>
             <div class="row mb-3">
@@ -79,7 +82,10 @@
                   !registerUserForm.get('userData.lastname')?.valid &&
                   registerUserForm.get('userData.lastname')?.touched
                 "
-                >Please check your lastname</small
+                >
+                  <span *ngIf="registerUserForm.get('userData.lastname')?.errors?.['required'];else lengthValidator">LastName is required!</span>
+                  <ng-template #lengthValidator>Lastname length must be larger than 3 chars</ng-template>
+                </small
               >
             </div>
           </div>
@@ -103,13 +109,9 @@
                 registerUserForm.get('email')?.touched
               "
             >
-              <span *ngIf="registerUserForm.get('email')?.errors?.['required']"
-                >Email is required</span
-              >
-              <span
-                *ngIf="registerUserForm.get('email')?.errors?.['emailPatternDismatch']"
-                >Email Pattern is not matched</span
-              >
+                  <span *ngIf="registerUserForm.get('email')?.errors?.['required']">Email is required</span>
+                  <span *ngIf="registerUserForm.get('email')?.errors?.['emailPatternDismatch']">Email Pattern is not matched</span>
+                  <span *ngIf="registerUserForm.get('email')?.errors?.['forbbidenEmail']">Email value is not permitted</span>
             </small>
           </div>
           <div class="row mb-3">
@@ -154,7 +156,7 @@
             </div>
           </div>
           <hr />
-          <button type="submit" (click)="submitForm()" class="btn btn-primary">
+          <button [disabled]="!registerUserForm.valid" type="submit" (click)="submitForm()" class="btn btn-primary">
             Register
           </button>
         </form>

@@ -29,14 +29,18 @@ export class RegisterUserComponent implements OnInit {
     email: '',
   });
   constructor(private apiSevrice: ApiService) {
-    this.registerUserForm = new FormGroup({
+    this.createFormControls();
+  }
+
+  createFormControls(){
+  this.registerUserForm = new FormGroup({
       userData: new FormGroup({
         username: new FormControl(null, [
           Validators.required,
           this.validatorFn.spaceNotAllowed.bind(this),
         ]),
-        firstname: new FormControl(null, Validators.required),
-        lastname: new FormControl(null, Validators.required),
+        firstname: new FormControl(null, [Validators.required,this.validatorFn.forBiddenNameLength.bind(this)]),
+        lastname: new FormControl(null, [Validators.required,this.validatorFn.forBiddenNameLength]),
       }),
       address: new FormGroup({
         street: new FormControl(null, Validators.required),
@@ -45,11 +49,10 @@ export class RegisterUserComponent implements OnInit {
       email: new FormControl(null, [
         Validators.required,
         this.validatorFn.emailPattern.bind(this),
-      ]),
+      ], this.validatorFn.forBiddenEmails),
       hobbies: new FormArray([]),
     });
   }
-
   submitForm() {
     if (!this.registerUserForm.valid) {
       this.formIsCorrect = false;
