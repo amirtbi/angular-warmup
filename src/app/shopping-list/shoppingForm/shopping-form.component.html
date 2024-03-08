@@ -1,27 +1,43 @@
 <h2>Add your ingredient</h2>
 <div>
-  <div class="mb-3">
-    <label for="Item" class="form-label">Item</label>
-    <textarea
-      [(ngModel)]="title"
-      class="form-control"
-      id="Item"
-      rows="3"
-    ></textarea>
-  </div>
-  <div class="mb-3">
-    <label for="Aisle" class="form-label">Aisle</label>
-    <input
-      [(ngModel)]="aisle"
-      type="text"
-      class="form-control"
-      id="Aisle"
-      placeholder="Aisle input placeholder"
-    />
-  </div>
-  <div class="col-md-6">
-    <button (click)="addToShoppingList()" class="btn btn-primary btn-block">
-      Add
-    </button>
-  </div>
+  <form [formGroup]="formRef">
+    <div class="mb-3">
+      <label for="Item" class="form-label">Item</label>
+      <textarea
+        class="form-control"
+        id="Item"
+        rows="3"
+        formControlName="item"
+      ></textarea>
+      <small
+        class="text-danger"
+        *ngIf="formRef.get('item')?.errors?.['required'] && formRef.get('item')?.touched"
+        >Item is required</small
+      >
+    </div>
+    <div class="mb-3">
+      <label for="Aisle" class="form-label">Aisle</label>
+      <input
+        type="text"
+        class="form-control"
+        id="Aisle"
+        formControlName="aisle"
+        placeholder="Aisle input placeholder"
+      />
+      <small
+        class="text-danger"
+        *ngIf="formRef.get('aisle')?.errors?.['required'] && formRef.get('aisle')?.touched"
+        >Aisle field is necessary</small
+      >
+    </div>
+    <div class="col-md-6">
+      <button
+        [disabled]="!formRef.valid"
+        (click)="addToShoppingList()"
+        class="btn btn-primary btn-block"
+      >
+        Add
+      </button>
+    </div>
+  </form>
 </div>

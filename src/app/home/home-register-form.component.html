@@ -58,11 +58,15 @@
                   !registerUserForm.get('userData.firstname')?.valid &&
                   registerUserForm.get('userData.firstname')?.touched
                 "
-                >
-                <span *ngIf="registerUserForm.get('userData.firstname')?.errors?.['required'];else lengthValidator">This field is requried.</span>
-                  <ng-template #lengthValidator>Firstname length must be larger than 3 chars.</ng-template>
-                </small
               >
+                <span
+                  *ngIf="registerUserForm.get('userData.firstname')?.errors?.['required'];else lengthValidator"
+                  >This field is requried.</span
+                >
+                <ng-template #lengthValidator
+                  >Firstname length must be larger than 3 chars.</ng-template
+                >
+              </small>
             </div>
             <div class="row mb-3">
               <label for="inputPassword3" class="col-sm-2 col-form-label"
@@ -82,11 +86,15 @@
                   !registerUserForm.get('userData.lastname')?.valid &&
                   registerUserForm.get('userData.lastname')?.touched
                 "
-                >
-                  <span *ngIf="registerUserForm.get('userData.lastname')?.errors?.['required'];else lengthValidator">LastName is required!</span>
-                  <ng-template #lengthValidator>Lastname length must be larger than 3 chars</ng-template>
-                </small
               >
+                <span
+                  *ngIf="registerUserForm.get('userData.lastname')?.errors?.['required'];else lengthValidator"
+                  >LastName is required!</span
+                >
+                <ng-template #lengthValidator
+                  >Lastname length must be larger than 3 chars</ng-template
+                >
+              </small>
             </div>
           </div>
 
@@ -109,9 +117,17 @@
                 registerUserForm.get('email')?.touched
               "
             >
-                  <span *ngIf="registerUserForm.get('email')?.errors?.['required']">Email is required</span>
-                  <span *ngIf="registerUserForm.get('email')?.errors?.['emailPatternDismatch']">Email Pattern is not matched</span>
-                  <span *ngIf="registerUserForm.get('email')?.errors?.['forbbidenEmail']">Email value is not permitted</span>
+              <span *ngIf="registerUserForm.get('email')?.errors?.['required']"
+                >Email is required</span
+              >
+              <span
+                *ngIf="registerUserForm.get('email')?.errors?.['emailPatternDismatch']"
+                >Email Pattern is not matched</span
+              >
+              <span
+                *ngIf="registerUserForm.get('email')?.errors?.['forbbidenEmail']"
+                >Email value is not permitted</span
+              >
             </small>
           </div>
           <div class="row mb-3">
@@ -156,9 +172,22 @@
             </div>
           </div>
           <hr />
-          <button [disabled]="!registerUserForm.valid" type="submit" (click)="submitForm()" class="btn btn-primary">
-            Register
-          </button>
+          <div class="col-md-12">
+            <button
+              [disabled]="!registerUserForm.valid"
+              type="submit"
+              (click)="submitForm()"
+              class="btn btn-primary"
+            >
+              Register
+            </button>
+            <button class="btn btn-info mx-2" (click)="setFormFieldValue()">
+              update formField value
+            </button>
+            <button class="btn btn-danger mx-2" (click)="setFormValue()">
+              set Form value
+            </button>
+          </div>
         </form>
       </div>
     </div>

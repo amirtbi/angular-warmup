@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { NgOptimizedImage } from '@angular/common';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
@@ -39,6 +39,7 @@ import { RegisterUserComponent } from './home/home-register-form.component';
     AppRouteModules,
     FormsModule,
     ReactiveFormsModule,
+    NgOptimizedImage,
   ],
   providers: [],
   bootstrap: [AppComponent],

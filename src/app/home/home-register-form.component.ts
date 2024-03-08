@@ -1,13 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from './userRegister.model';
-import {
-  AbstractControl,
-  Form,
-  FormArray,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../shared/api.shared.service';
 import { CustomValidatorsFn } from '../cores/validators/validators';
 @Component({
@@ -30,26 +23,39 @@ export class RegisterUserComponent implements OnInit {
   });
   constructor(private apiSevrice: ApiService) {
     this.createFormControls();
+    // this.registerUserForm.statusChanges.subscribe((value) =>
+    //   console.warn('status changed', value)
+    // );
+    // this.registerUserForm.valueChanges.subscribe((value) => {
+    //   console.warn('value changed', value);
+    // });
   }
 
-  createFormControls(){
-  this.registerUserForm = new FormGroup({
+  createFormControls() {
+    this.registerUserForm = new FormGroup({
       userData: new FormGroup({
         username: new FormControl(null, [
           Validators.required,
           this.validatorFn.spaceNotAllowed.bind(this),
         ]),
-        firstname: new FormControl(null, [Validators.required,this.validatorFn.forBiddenNameLength.bind(this)]),
-        lastname: new FormControl(null, [Validators.required,this.validatorFn.forBiddenNameLength]),
+        firstname: new FormControl(null, [
+          Validators.required,
+          this.validatorFn.forBiddenNameLength.bind(this),
+        ]),
+        lastname: new FormControl(null, [
+          Validators.required,
+          this.validatorFn.forBiddenNameLength,
+        ]),
       }),
       address: new FormGroup({
         street: new FormControl(null, Validators.required),
         city: new FormControl(null, Validators.required),
       }),
-      email: new FormControl(null, [
-        Validators.required,
-        this.validatorFn.emailPattern.bind(this),
-      ], this.validatorFn.forBiddenEmails),
+      email: new FormControl(
+        null,
+        [Validators.required, this.validatorFn.emailPattern.bind(this)],
+        this.validatorFn.forBiddenEmails
+      ),
       hobbies: new FormArray([]),
     });
   }
@@ -58,13 +64,7 @@ export class RegisterUserComponent implements OnInit {
       this.formIsCorrect = false;
     } else {
       this.formIsCorrect = true;
-      // this.registerUserForm.reset();
     }
-    console.warn(this.registerUserForm);
-
-    // this.apiSevrice.postHttp('users/connect', this.user).subscribe((data) => {
-    //   console.warn('subscirbed', data);
-    // });
   }
 
   ngOnInit(): void {}
@@ -72,6 +72,24 @@ export class RegisterUserComponent implements OnInit {
     return this.registerUserForm.get('hobbies') as FormArray;
   }
 
+  setFormValue() {
+    this.registerUserForm.setValue({
+      userData: {
+        username: 'amirtbi',
+        firstname: 'amirhosein',
+        lastname: 'torabi',
+      },
+      email: 'torabi@gmail.com',
+      address: {
+        street: '1',
+        city: 'Tehran',
+      },
+      hobbies: [],
+    });
+  }
+  setFormFieldValue() {
+    this.registerUserForm.patchValue({ email: 'amirs@gmail.com' });
+  }
   addressIsNotValid() {
     if (
       (this.registerUserForm.get('address.street')?.errors?.['required'] ||

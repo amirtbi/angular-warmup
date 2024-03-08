@@ -1,5 +1,15 @@
-<a class="card" style="cursor: pointer" (click)="showDetail(id)">
-  <img [src]="imgPath" class="card-img-top" alt="..." />
+<a
+  class="card"
+  style="cursor: pointer; min-height: 100%"
+  (click)="showDetail(id)"
+>
+  <img
+    [ngSrc]="imgPath"
+    width="50"
+    height="200"
+    class="card-img-top"
+    alt="..."
+  />
   <div class="card-body">
     <h5 class="card-title">Card title</h5>
     <p class="card-text">
