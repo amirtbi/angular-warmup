@@ -18,4 +18,8 @@ export class RecipeComponent {
       relativeTo: this.route,
     });
   }
+
+  showDetailText(id:any){
+    console.warn("hovered",id)
+  }
 }

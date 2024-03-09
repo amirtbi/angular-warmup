@@ -17,7 +17,8 @@ import { HomeComponent } from './home/home.component';
 import { AppRouteModules } from './app.route.module';
 import { NewRecipeFormComponent } from './recipes/new-recipe/recipe.form.component';
 import { RegisterUserComponent } from './home/home-register-form.component';
-
+import { ShortenLengthPipe } from './cores/pipes/shorten.pipe';
+import { FilterPipe } from './cores/pipes/filter.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +33,8 @@ import { RegisterUserComponent } from './home/home-register-form.component';
     RecipeDetailsComponent,
     NewRecipeFormComponent,
     RegisterUserComponent,
+    ShortenLengthPipe,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

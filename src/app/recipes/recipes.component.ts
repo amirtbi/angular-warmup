@@ -8,7 +8,12 @@ import { ApiService } from '../shared/api.shared.service';
 })
 export class RecipesComponent implements OnInit {
   recipes: { title: string; image: string; id: number }[] = [];
-
+  filterText ="";
+  currentDate = new Promise(resolve=>{
+    setTimeout(()=>{
+      resolve(new Date())
+    },3000)
+  })
   constructor(
     private recipeService: RecipeService,
     private apiService: ApiService

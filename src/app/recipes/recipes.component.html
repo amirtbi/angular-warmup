@@ -1,11 +1,24 @@
 <div class="col-md-12">
   <div class="row p-2">
-    <div *ngFor="let recipe of recipes" class="col-md-3 my-2">
-      <app-recipe
-        [title]="recipe.title"
-        [id]="recipe.id"
-        [image]="recipe.image"
-      ></app-recipe>
+    <div>
+      current Date:{{currentDate | async}}
     </div>
+    <div class="col-md-12">
+      <input placeholder="recipe" [(ngModel)]="filterText" type="text" class="form-control"/>
+    </div>
+    <ng-container *ngIf="filterText;else notFound">
+      <div *ngFor="let recipe of recipes | filter:filterText:'title'" class="col-md-3 my-2">
+        <app-recipe
+          [title]="recipe.title"
+          [id]="recipe.id"
+          [image]="recipe.image"
+        ></app-recipe>
+      </div>
+    </ng-container>
+    <ng-template #notFound>
+      <div class="col-md-12">
+        <p class="text-center p-4 text-bold ">Not found any items</p>
+      </div>
+    </ng-template>
   </div>
 </div>

@@ -11,9 +11,10 @@
     alt="..."
   />
   <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">
-      {{ title }}
+    <h5 class="card-title" >Card title</h5>
+    <p  class="text-bold card-text" data-bs-toggle="tooltip" data-bs-placement="left"
+    [title]="title">
+      {{ title | shorten:15 }}
     </p>
     <button class="btn btn-primary btn-sm">Detail</button>
   </div>
