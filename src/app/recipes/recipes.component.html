@@ -20,13 +20,21 @@
         <app-recipe
           [title]="recipe.title"
           [id]="recipe.id"
-          [image]="recipe.image"
+          [image]="recipe.imageSrc"
         ></app-recipe>
       </div>
     </ng-container>
     <div *ngIf="!loading && recipes.length===0">
       <div class="col-md-12">
         <p class="text-center p-4 text-bold ">Not found any items</p>
+      </div>
+    </div>
+    <div *ngIf="error">
+      <div class="col-md-12">
+        <div class="alert alert-danger" role="alert">
+          <h2>Something went wrong!</h2>
+          <p>{{error}}</p>
+        </div>
       </div>
     </div>
   </div>

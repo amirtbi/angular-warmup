@@ -1,5 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { RecipeService } from 'src/app/shared/recipes.service';
+import { SupbaseService } from 'src/app/shared/supabase.service';
 
 @Component({
   selector: 'recipe-form',
@@ -8,20 +10,18 @@ import { NgForm } from '@angular/forms';
 })
 export class NewRecipeFormComponent {
   @ViewChild('formRef') formRef: NgForm;
-  user = {
-    email: '',
-    password: '',
-    gender: '',
+  recipe = {
+    title: '',
+    imageSrc: '',
   };
   submitted = false;
-  genders = ['male', 'female'];
+constructor(private recipeService:RecipeService){}
   submitForm() {
-    this.formRef.form.patchValue({ password: 'amirs' });
-    this.user.email = this.formRef.value.email;
-    this.user.password = this.formRef.value.password;
-    this.user.gender = this.formRef.value.gender;
+    this.recipe.title = this.formRef.value.title;
+    this.recipe.imageSrc = this.formRef.value.imageFile;
+    this.recipeService.addRecipe({...this.recipe,imageType:"jpg"});
     this.submitted = true;
-    console.log('formref', this.formRef);
+    this.resetForm();
   }
   resetForm() {
     this.formRef.reset();
