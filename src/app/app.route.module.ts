@@ -10,9 +10,11 @@ import { canActivateRoute } from './shared/router-guard.service';
 import { resolveRecipeDetail } from './recipes/recipe-details/recipe.details.resolver';
 import { shoppingListItemsResolver } from './shopping-list/shopping-list-items/shopping-list-items.resolver';
 import { NewRecipeFormComponent } from './recipes/new-recipe/recipe.form.component';
+import { AuthComponent } from './auth/auth.component';
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
+  { path: 'Auth', component: AuthComponent },
   {
     path: 'add-recipe',
     component: NewRecipeFormComponent,

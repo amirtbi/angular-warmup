@@ -1,0 +1,35 @@
+<div class="shadow-lg m-4 col-md-12">
+  <div class="d-flex justify-content-center align-items-center">
+    <h4 class="text-h4 my-2">Sign in</h4>
+  </div>
+  <form (ngSubmit)="signIn()" [formGroup]="signInForm" class="p-4">
+    <div class="col-md-12">
+      <label for="inputEmail4" class="form-label">Email</label>
+      <input
+        formControlName="email"
+        type="email"
+        class="form-control"
+        id="inputEmail4"
+      />
+    </div>
+    <div class="col-md-12">
+      <label for="inputPassword4" class="form-label">Password</label>
+      <input
+        formControlName="password"
+        type="password"
+        class="form-control"
+        id="inputPassword4"
+      />
+    </div>
+    <div class="d-grid my-2 gap-2">
+      <button class="btn btn-primary" type="submit">Sign In</button>
+      <button
+        (click)="setAuthType()"
+        class="btn btn-outline-primary"
+        type="button"
+      >
+        SignUp
+      </button>
+    </div>
+  </form>
+</div>
