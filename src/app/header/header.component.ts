@@ -1,5 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
-import { ApiService } from '../shared/api.shared.service';
+import { AuthService } from '../shared/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -8,15 +9,21 @@ import { ApiService } from '../shared/api.shared.service';
 })
 export class HeaderComponent implements OnDestroy {
   currentFetchStatus: string = '';
-  constructor(private apiService: ApiService) {}
+  isLoggedin = false;
+  constructor(private authService: AuthService, private router: Router) {}
 
-  ngOnDestroy(): void {
-    this.apiService.fetchStatus.unsubscribe();
+  ngOnDestroy(): void {}
+
+  logOut() {
+    this.authService.logOut();
   }
-
+  navigateToAuthPage() {
+    this.router.navigate(['/Auth'], { queryParams: { auth: 'signIn' } });
+  }
   ngOnInit(): void {
-    this.apiService.fetchStatus.subscribe((data) => {
-      this.currentFetchStatus = data;
+    this.authService.userIsLoggedIn.subscribe((isAuth) => {
+      console.log('is auth', isAuth);
+      this.isLoggedin = isAuth;
     });
   }
 }
