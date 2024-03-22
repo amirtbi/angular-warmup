@@ -14,7 +14,7 @@ import { AuthComponent } from './auth/auth.component';
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'Auth', component: AuthComponent },
+  { path: 'Auth', component: AuthComponent, canActivate: [canActivateRoute] },
   {
     path: 'add-recipe',
     component: NewRecipeFormComponent,

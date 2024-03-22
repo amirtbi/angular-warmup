@@ -22,7 +22,13 @@
       />
     </div>
     <div class="d-grid my-2 gap-2">
-      <button class="btn btn-primary" type="submit">Sign Up</button>
+      <button
+        [disabled]="!signUpForm.valid"
+        class="btn btn-primary"
+        type="submit"
+      >
+        Sign Up
+      </button>
       <button
         (click)="setAuthType()"
         class="btn btn-outline-primary"

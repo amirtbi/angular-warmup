@@ -29,17 +29,12 @@ export class HomeComponent implements OnDestroy {
   getLogStatus() {
     return this.authService.isAuth();
   }
-  logIn() {
-    this.authService.logIn();
-  }
-  logOut() {
-    this.authService.logOut();
-    console.warn('after logout', this.userIsLoggedIn);
-  }
   ngOnDestroy(): void {}
 
   ngOnInit() {
-    this.userIsLoggedIn = this.authService.isAuth();
+    this.authService.userIsLoggedIn.subscribe((isAuth) => {
+      this.userIsLoggedIn = isAuth;
+    });
 
     // const customHttpRequest = new Observable((observer) => {
     //   fetch('https://jsonplaceholder.typicode.com/comments')
