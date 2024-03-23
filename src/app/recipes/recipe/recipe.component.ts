@@ -10,6 +10,8 @@ export class RecipeComponent {
   @Input('title') title: string = '';
   @Input('image') imgPath: string = '';
   @Input('description') description: string = '';
+  @Input('date') date: Date;
+
   @Input('id') id: number = 0;
 
   constructor(private route: ActivatedRoute, private router: Router) {}

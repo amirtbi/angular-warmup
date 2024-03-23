@@ -14,6 +14,7 @@ export class NewRecipeFormComponent {
     title: '',
     imageSrc: '',
     description: '',
+    date: '',
   };
   submitted = false;
   constructor(private recipeService: RecipeService) {}
@@ -21,6 +22,7 @@ export class NewRecipeFormComponent {
     this.recipe.title = this.formRef.value.title;
     this.recipe.imageSrc = this.formRef.value.imageFile;
     this.recipe.description = this.formRef.value.description;
+    this.recipe.date = new Date().toDateString();
     this.recipeService.addRecipe({ ...this.recipe, imageType: 'jpg' });
     this.submitted = true;
     this.resetForm();
