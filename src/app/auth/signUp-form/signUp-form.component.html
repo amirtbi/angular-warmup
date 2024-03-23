@@ -11,6 +11,16 @@
         class="form-control"
         id="inputEmail4"
       />
+      <small
+        class="text-danger"
+        *ngIf="signUpForm.get('email')?.errors?.['required'] && signUpForm.get('email')?.touched"
+        >Email is required</small
+      >
+      <small
+        class="text-danger"
+        *ngIf="signUpForm.get('email')?.errors?.['emailPatternDismatch']"
+        >Email is not valid</small
+      >
     </div>
     <div class="col-md-12">
       <label for="inputPassword4" class="form-label">Password</label>
@@ -20,6 +30,16 @@
         class="form-control"
         id="inputPassword4"
       />
+      <small
+        class="text-danger"
+        *ngIf="signUpForm.get('password')?.errors?.['required'] && signUpForm.get('password')?.touched"
+        >Password is required</small
+      >
+      <small
+        class="text-danger"
+        *ngIf="signUpForm.get('password')?.errors?.['minlength']"
+        >Password Length is larger than 6 chars</small
+      >
     </div>
     <div class="d-grid my-2 gap-2">
       <button

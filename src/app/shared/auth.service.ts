@@ -12,12 +12,23 @@ export class AuthService {
   constructor(private supabaseService: SupbaseService) {
     this.userIsLoggedIn.next(false);
   }
-  async signUp(auth: IAuth) {
-    const authInfo = await this.supabaseService.supabase.auth.signUp({
-      email: auth.email,
-      password: auth.password,
-    });
-    console.warn('Auth info', authInfo);
+  signUp(auth: IAuth) {
+    const authInfo$ = from(
+      this.supabaseService.supabase.auth.signUp({
+        email: auth.email,
+        password: auth.password,
+      })
+    ).pipe(
+      map((data) => {
+        if (data.error) {
+          this.userIsLoggedIn.next(false);
+          throw new Error('User data is not valid');
+        } else {
+          this.userIsLoggedIn.next(data.user?.aud === 'authenticated');
+        }
+      })
+    );
+    return authInfo$;
   }
   signIn(auth: IAuth) {
     const authInfo$ = from(
