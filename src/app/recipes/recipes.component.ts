@@ -15,28 +15,21 @@ export class RecipesComponent implements OnInit {
   filterText = '';
   loading = false;
   error: null;
-  currentDate = new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(new Date());
-    }, 3000);
-  });
-
   constructor(private recipeService: RecipeService) {}
-
   customColumn() {
     const recipesLength = this.recipes.length;
     const columns = Math.ceil(recipesLength / 12);
     return `col-md-${columns}`;
   }
-
   ngOnInit() {
+    this.loading = true;
     this.recipeService.getRecipes().subscribe({
       next: (data: any) => {
         console.warn('error', data);
         this.recipes = data;
       },
       error: (error: any) => (this.error = error),
-      complete: () => console.log('completed...'),
+      complete: () => (this.loading = false),
     });
   }
 }

@@ -1,3 +1,4 @@
+import { NgFor } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { RecipeService } from 'src/app/shared/recipes.service';
@@ -10,20 +11,14 @@ import { SupbaseService } from 'src/app/shared/supabase.service';
 })
 export class NewRecipeFormComponent {
   @ViewChild('formRef') formRef: NgForm;
-  recipe = {
-    title: '',
-    imageSrc: '',
-    description: '',
-    date: '',
-  };
   submitted = false;
   constructor(private recipeService: RecipeService) {}
-  submitForm() {
-    this.recipe.title = this.formRef.value.title;
-    this.recipe.imageSrc = this.formRef.value.imageFile;
-    this.recipe.description = this.formRef.value.description;
-    this.recipe.date = new Date().toDateString();
-    this.recipeService.addRecipe({ ...this.recipe, imageType: 'jpg' });
+  submitForm(formRef: NgForm) {
+    this.recipeService.addRecipe({
+      ...formRef.form.value,
+      imageType: 'jpg',
+      date: new Date().toDateString(),
+    });
     this.submitted = true;
     this.resetForm();
   }
