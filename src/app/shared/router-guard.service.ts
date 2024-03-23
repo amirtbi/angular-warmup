@@ -17,7 +17,7 @@ export const canActivateRoute: CanActivateFn = (
   const apiService = inject(ApiService);
   console.log('state', state);
   if (
-    (authservice.userIsLoggedIn.value && state.url.includes('Auth')) ||
+    (authservice.userIsLoggedIn.value && !state.url.includes('Auth')) ||
     (!authservice.userIsLoggedIn.value && state.url.includes('/Auth'))
   ) {
     return true;
