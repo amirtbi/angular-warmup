@@ -3,7 +3,7 @@
     <div class="shadow-lg mt-4 col-md-8 p-4">
       <div class="my-2">
         <h4>Register new recipe</h4>
-        <form  #formRef="ngForm">
+        <form #formRef="ngForm">
           <div class="row mb-3">
             <label for="inputEmail3" class="col-sm-2 col-form-label"
               >Title</label
@@ -24,11 +24,33 @@
             >
           </div>
           <div class="row mb-3">
-            <label for="inputPassword3" class="col-sm-2 col-form-label"
+            <label for="inputDescription" class="col-sm-2 col-form-label"
+              >Description</label
+            >
+            <div class="col-sm-10">
+              <input
+                ngModel
+                name="description"
+                type="text"
+                class="form-control"
+                id="inputTitle"
+                #description="ngModel"
+              />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="inputImageUrl" class="col-sm-2 col-form-label"
               >Upload image url</label
             >
             <div class="col-sm-10">
-                <input ngModel name="imageFile" #imageFile="ngModel"  class="form-control" type="text" id="formFile">
+              <input
+                ngModel
+                name="imageFile"
+                #imageFile="ngModel"
+                class="form-control"
+                type="text"
+                id="formFile"
+              />
             </div>
             <small
               class="text-danger"
@@ -45,7 +67,9 @@
           >
             Create Recipe
           </button>
-          <button (click)="resetForm()" class="btn mx-2 btn-sm btn-danger">Reset</button>
+          <button (click)="resetForm()" class="btn mx-2 btn-sm btn-danger">
+            Reset
+          </button>
         </form>
       </div>
     </div>

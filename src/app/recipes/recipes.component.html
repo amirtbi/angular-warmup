@@ -1,39 +1,37 @@
 <div class="col-md-12">
   <div class="row p-2">
-    <!-- <div>
-      current Date:{{currentDate | async}}
-    </div> -->
-    <div>
-      <button class="mx-2 btn btn-small btn-secondary" (click)="onFetchData()">Fetch data<small>(just for check)</small></button>
-      <button class="btn btn-small btn-info" (click)="onCreatePostData()">Post Data</button>
-    </div>
-    <br>
-    <br>
     <div class="col-md-12">
-      <input placeholder="recipe" [(ngModel)]="filterText" type="text" class="form-control"/>
+      <input
+        placeholder="recipe"
+        [(ngModel)]="filterText"
+        type="text"
+        class="form-control"
+      />
     </div>
-    <strong class="text-center" *ngIf="loading">
-      loading...
-    </strong>
-    <ng-container  *ngIf="recipes.length && !loading">
-      <div *ngFor="let recipe of recipes | filter:filterText:'title'" class="col-md-3 my-2">
+    <strong class="text-center" *ngIf="loading"> loading... </strong>
+    <ng-container *ngIf="recipes.length && !loading">
+      <div
+        *ngFor="let recipe of recipes | filter : filterText : 'title'"
+        class="col-md-3 my-2"
+      >
         <app-recipe
           [title]="recipe.title"
           [id]="recipe.id"
           [image]="recipe.imageSrc"
+          [description]="recipe.description"
         ></app-recipe>
       </div>
     </ng-container>
-    <div *ngIf="!loading && recipes.length===0">
+    <div *ngIf="!loading && recipes.length === 0">
       <div class="col-md-12">
-        <p class="text-center p-4 text-bold ">Not found any items</p>
+        <p class="text-center p-4 text-bold">Not found any items</p>
       </div>
     </div>
     <div *ngIf="error">
       <div class="col-md-12">
         <div class="alert alert-danger" role="alert">
           <h2>Something went wrong!</h2>
-          <p>{{error}}</p>
+          <p>{{ error }}</p>
         </div>
       </div>
     </div>

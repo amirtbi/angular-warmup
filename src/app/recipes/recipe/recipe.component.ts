@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class RecipeComponent {
   @Input('title') title: string = '';
   @Input('image') imgPath: string = '';
+  @Input('description') description: string = '';
   @Input('id') id: number = 0;
 
   constructor(private route: ActivatedRoute, private router: Router) {}
@@ -19,7 +20,7 @@ export class RecipeComponent {
     });
   }
 
-  showDetailText(id:any){
-    console.warn("hovered",id)
+  showDetailText(id: any) {
+    console.warn('hovered', id);
   }
 }

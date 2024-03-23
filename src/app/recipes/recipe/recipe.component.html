@@ -6,14 +6,18 @@
   <img
     [src]="imgPath"
     class="card-img-top"
-    style="min-height: 100%;"
+    style="min-height: 100%; height: 200px"
     alt="recipe"
   />
   <div class="card-body">
-    <h5 class="card-title" >Card title</h5>
-    <p  class="text-bold card-text" data-bs-toggle="tooltip" data-bs-placement="left"
-    [title]="title">
-      {{ title | shorten:15 }}
+    <h5 class="card-title">{{ title | shorten : 15 }}</h5>
+    <p
+      class="text-bold card-text"
+      data-bs-toggle="tooltip"
+      data-bs-placement="left"
+      [title]="title"
+    >
+      {{ description | shorten : 20 }}
     </p>
     <button class="btn btn-primary btn-sm">Detail</button>
   </div>
