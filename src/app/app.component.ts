@@ -22,4 +22,8 @@ export class AppComponent {
       .getHttp('recipes/complexSearch')
       .subscribe((data) => console.warn('data', data));
   }
+
+  ngOnInit(): void {
+    this.authService.autoLogin()
+  }
 }

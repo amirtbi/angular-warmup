@@ -1,14 +1,15 @@
 <div class="row">
-  <div
-    class="col-md-12 d-flex flex-column justify-content-center align-items-center"
-  >
-    <signup-form
-      (emitAuthType)="setActiveAuth($event)"
-      *ngIf="authType === 'signUp'"
-    ></signup-form>
-    <signin-form
-      (emitAuthType)="setActiveAuth($event)"
-      *ngIf="authType === 'signIn'"
-    ></signin-form>
+  <div class="col-md-12 d-flex flex-column justify-content-center align-items-center">
+    <ng-container *ngIf="error">
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Error!</strong>Something went wrong during authentication.&nbsp;
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+          (click)="toggleError()"></button>
+      </div>
+    </ng-container>
+    <signup-form (emitError)="toggleError()" (emitAuthType)="setActiveAuth($event)"
+      *ngIf="authType === 'signUp'"></signup-form>
+    <signin-form (emitError)="toggleError()" (emitAuthType)="setActiveAuth($event)"
+      *ngIf="authType === 'signIn'"></signin-form>
   </div>
 </div>

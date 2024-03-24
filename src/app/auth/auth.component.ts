@@ -7,8 +7,8 @@ import { ActivatedRoute, Params, Route, Router } from '@angular/router';
 })
 export class AuthComponent {
   authType: 'signUp' | 'signIn' = 'signUp';
-
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  error = false;
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   setActiveAuth(authType: 'signUp' | 'signIn') {
     this.router.navigate([], {
@@ -18,6 +18,9 @@ export class AuthComponent {
     });
   }
 
+  toggleError() {
+    this.error = !this.error;
+  }
   ngOnInit(): void {
     this.route.queryParams.subscribe((route: Params) => {
       if (route['auth'] && route['auth'] === 'signIn') {

@@ -10,6 +10,7 @@ import { CustomValidatorsFn } from 'src/app/cores/validators/validators';
 })
 export class SignInComponent {
   @Output() emitAuthType = new EventEmitter<'signUp' | 'signIn'>();
+  @Output() emitError = new EventEmitter<boolean>();
   signInForm: FormGroup;
   validatorFn = new CustomValidatorsFn();
   constructor(private authService: AuthService, private router: Router) {
@@ -32,13 +33,13 @@ export class SignInComponent {
         password: this.signInForm.value.password,
       })
       .subscribe({
-        next: () => {
+        next: (data) => {
           this.router.navigate(['/recipes']);
         },
         error: () => {
-          this.signInForm.reset();
+          this.emitError.emit(true);
         },
-        complete: () => {},
+        complete: () => { this.signInForm.reset(); },
       });
   }
   setAuthType() {

@@ -1,16 +1,19 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/auth.service';
 import { CustomValidatorsFn } from 'src/app/cores/validators/validators';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'signup-form',
   templateUrl: './signUp-form.component.html',
   styleUrls: ['../auth.component.style.css'],
 })
-export class SignUpComponent {
+export class SignUpComponent implements OnDestroy {
   @Output() emitAuthType = new EventEmitter<'signUp' | 'signIn'>();
+  @Output() emitError = new EventEmitter<boolean>();
   signUpForm: FormGroup;
+  signUp$: Subscription;
   validatorFn = new CustomValidatorsFn();
 
   constructor(private authService: AuthService, private router: Router) {
@@ -27,7 +30,7 @@ export class SignUpComponent {
   }
 
   signUp() {
-    this.authService
+    this.signUp$ = this.authService
       .signUp({
         email: this.signUpForm.value.email,
         password: this.signUpForm.value.password,
@@ -37,19 +40,18 @@ export class SignUpComponent {
           this.router.navigate(['/recipes']);
         },
         error: () => {
-          this.signUpForm.reset();
+          this.emitError.emit(true);
         },
-        complete: () => {},
+        complete: () => { this.signUpForm.reset(); },
       });
-
-    this.authService.signUp({
-      email: this.signUpForm.value.email,
-      password: this.signUpForm.value.password,
-    });
   }
 
   setAuthType() {
     this.emitAuthType.emit('signIn');
   }
-  submitAuth() {}
+  submitAuth() { }
+
+  ngOnDestroy(): void {
+    this.signUp$.unsubscribe();
+  }
 }
