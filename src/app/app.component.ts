@@ -1,19 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { ApiService } from './shared/api.shared.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, Router, RouterState, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from './shared/auth.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'route-app';
-
-  constructor(private apiService: ApiService, private authService: AuthService, private router: Router) {
+  constructor(private apiService: ApiService, private authService: AuthService, private router: Router, private route: ActivatedRoute) {
     this.authService.userIsLoggedIn.subscribe(isAuth => {
-      if (!isAuth) {
-        this.router.navigate(['/home'])
+      if (!isAuth && !this.router.url.includes("Auth")) {
+        this.router.navigate(['/Auth'], { queryParams: { auth: 'signIn' } })
       }
     })
   }
@@ -23,6 +22,4 @@ export class AppComponent implements OnInit {
       .getHttp('recipes/complexSearch')
       .subscribe((data) => console.warn('data', data));
   }
-
-  ngOnInit(): void { }
 }
