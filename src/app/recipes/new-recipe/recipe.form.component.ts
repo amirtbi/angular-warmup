@@ -1,6 +1,8 @@
 import { NgFor } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/shared/auth.service';
 import { RecipeService } from 'src/app/shared/recipes.service';
 import { SupbaseService } from 'src/app/shared/supabase.service';
 
@@ -9,10 +11,10 @@ import { SupbaseService } from 'src/app/shared/supabase.service';
   templateUrl: './recipe-form.component.html',
   styleUrls: ['./recipe-form.component.scss'],
 })
-export class NewRecipeFormComponent {
+export class NewRecipeFormComponent implements OnInit {
   @ViewChild('formRef') formRef: NgForm;
   submitted = false;
-  constructor(private recipeService: RecipeService) {}
+  constructor(private recipeService: RecipeService, private authService: AuthService, private router: Router) { }
   submitForm(formRef: NgForm) {
     this.recipeService.addRecipe({
       ...formRef.form.value,
@@ -24,5 +26,7 @@ export class NewRecipeFormComponent {
   }
   resetForm() {
     this.formRef.reset();
+  }
+  ngOnInit(): void {
   }
 }

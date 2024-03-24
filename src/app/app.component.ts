@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from './shared/api.shared.service';
+import { Router } from '@angular/router';
+import { AuthService } from './shared/auth.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,7 +10,13 @@ import { ApiService } from './shared/api.shared.service';
 export class AppComponent implements OnInit {
   title = 'route-app';
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private authService: AuthService, private router: Router) {
+    this.authService.userIsLoggedIn.subscribe(isAuth => {
+      if (!isAuth) {
+        this.router.navigate(['/home'])
+      }
+    })
+  }
 
   getRecipe() {
     this.apiService
@@ -16,5 +24,5 @@ export class AppComponent implements OnInit {
       .subscribe((data) => console.warn('data', data));
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

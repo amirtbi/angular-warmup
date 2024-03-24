@@ -3,14 +3,16 @@ import { SupbaseService } from './supabase.service';
 import { IAuth } from './models/auth.models';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { from, map } from 'rxjs';
+import { ActivatedRoute, ActivatedRouteSnapshot, Route, Router } from '@angular/router';
 @Injectable({
   providedIn: 'root',
 })
+
 export class AuthService {
   userIsLoggedIn = new BehaviorSubject<boolean>(false);
-
   constructor(private supabaseService: SupbaseService) {
     this.userIsLoggedIn.next(false);
+
   }
   signUp(auth: IAuth) {
     const authInfo$ = from(

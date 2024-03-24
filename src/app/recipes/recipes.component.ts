@@ -15,7 +15,7 @@ export class RecipesComponent implements OnInit {
   filterText = '';
   loading = false;
   error: null;
-  constructor(private recipeService: RecipeService) {}
+  constructor(private recipeService: RecipeService) { }
   customColumn() {
     const recipesLength = this.recipes.length;
     const columns = Math.ceil(recipesLength / 12);
@@ -25,10 +25,10 @@ export class RecipesComponent implements OnInit {
     this.loading = true;
     this.recipeService.getRecipes().subscribe({
       next: (data: any) => {
-        console.warn('error', data);
+        console.warn('data', data);
         this.recipes = data;
       },
-      error: (error: any) => (this.error = error),
+      error: (error: any) => { this.error = error; console.log("Errorss", error); this.loading = false },
       complete: () => (this.loading = false),
     });
   }

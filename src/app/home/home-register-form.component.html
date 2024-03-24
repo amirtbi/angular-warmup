@@ -4,151 +4,81 @@
       <div class="my-2">
         <h4>Register user</h4>
         <form [formGroup]="registerUserForm" class="p-4">
-          <span class="text-danger" *ngIf="!formIsCorrect"
-            >Please Fill the form with correct data</span
-          >
+          <span class="text-danger" *ngIf="!formIsCorrect">Please Fill the form with correct data</span>
           <div formGroupName="userData">
             <div class="row mb-3">
-              <label for="emailInput" class="col-sm-2 col-form-label"
-                >Username</label
-              >
-              <div class="col-sm-10">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="emailInput"
-                  formControlName="username"
-                />
+              <label for="emailInput" class="col-sm-12 col-form-label">Username</label>
+              <div class="col-sm-12">
+                <input type="text" class="form-control" id="emailInput" formControlName="username" />
               </div>
-              <small
-                class="text-danger"
-                *ngIf="
+              <small class="text-danger" *ngIf="
                   !registerUserForm.get('userData.username')?.valid &&
                   registerUserForm.get('userData.username')?.touched
-                "
-                ><span
-                  *ngIf="
+                "><span *ngIf="
                     registerUserForm.get('userData.username')?.errors?.[
                       'required'
                     ]
-                  "
-                  >This field is required</span
-                >
-                <span
-                  *ngIf="registerUserForm.get('userData.username')?.errors?.['spaceNotAllowed']"
-                  >Space not allowed!.</span
-                >
+                  ">This field is required</span>
+                <span *ngIf="registerUserForm.get('userData.username')?.errors?.['spaceNotAllowed']">Space not
+                  allowed!.</span>
               </small>
             </div>
             <div class="row mb-3">
-              <label for="fNameInput" class="col-sm-2 col-form-label"
-                >Firstname</label
-              >
-              <div class="col-sm-10">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="fNameInput"
-                  formControlName="firstname"
-                />
+              <label for="fNameInput" class="col-sm-12 col-form-label">Firstname</label>
+              <div class="col-sm-12">
+                <input type="text" class="form-control" id="fNameInput" formControlName="firstname" />
               </div>
-              <small
-                class="text-danger"
-                *ngIf="
+              <small class="text-danger" *ngIf="
                   !registerUserForm.get('userData.firstname')?.valid &&
                   registerUserForm.get('userData.firstname')?.touched
-                "
-              >
-                <span
-                  *ngIf="registerUserForm.get('userData.firstname')?.errors?.['required'];else lengthValidator"
-                  >This field is requried.</span
-                >
-                <ng-template #lengthValidator
-                  >Firstname length must be larger than 3 chars.</ng-template
-                >
+                ">
+                <span *ngIf="registerUserForm.get('userData.firstname')?.errors?.['required'];else lengthValidator">This
+                  field is requried.</span>
+                <ng-template #lengthValidator>Firstname length must be larger than 3 chars.</ng-template>
               </small>
             </div>
             <div class="row mb-3">
-              <label for="inputPassword3" class="col-sm-2 col-form-label"
-                >Lastname</label
-              >
-              <div class="col-sm-10">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="inputPassword3"
-                  formControlName="lastname"
-                />
+              <label for="inputPassword3" class="col-sm-12 col-form-label">Lastname</label>
+              <div class="col-sm-12">
+                <input type="text" class="form-control" id="inputPassword3" formControlName="lastname" />
               </div>
-              <small
-                class="text-danger"
-                *ngIf="
+              <small class="text-danger" *ngIf="
                   !registerUserForm.get('userData.lastname')?.valid &&
                   registerUserForm.get('userData.lastname')?.touched
-                "
-              >
+                ">
                 <span
-                  *ngIf="registerUserForm.get('userData.lastname')?.errors?.['required'];else lengthValidator"
-                  >LastName is required!</span
-                >
-                <ng-template #lengthValidator
-                  >Lastname length must be larger than 3 chars</ng-template
-                >
+                  *ngIf="registerUserForm.get('userData.lastname')?.errors?.['required'];else lengthValidator">LastName
+                  is required!</span>
+                <ng-template #lengthValidator>Lastname length must be larger than 3 chars</ng-template>
               </small>
             </div>
           </div>
 
           <div class="row mb-3">
-            <label for="emailInput" class="col-sm-2 col-form-label"
-              >Email</label
-            >
+            <label for="emailInput" class="col-sm-2 col-form-label">Email</label>
             <div class="col-sm-10">
-              <input
-                type="email"
-                class="form-control"
-                id="emailInput"
-                formControlName="email"
-              />
+              <input type="email" class="form-control" id="emailInput" formControlName="email" />
             </div>
-            <small
-              class="text-danger"
-              *ngIf="
+            <small class="text-danger" *ngIf="
                 !registerUserForm.get('email')?.valid &&
                 registerUserForm.get('email')?.touched
-              "
-            >
-              <span *ngIf="registerUserForm.get('email')?.errors?.['required']"
-                >Email is required</span
-              >
-              <span
-                *ngIf="registerUserForm.get('email')?.errors?.['emailPatternDismatch']"
-                >Email Pattern is not matched</span
-              >
-              <span
-                *ngIf="registerUserForm.get('email')?.errors?.['forbbidenEmail']"
-                >Email value is not permitted</span
-              >
+              ">
+              <span *ngIf="registerUserForm.get('email')?.errors?.['required']">Email is required</span>
+              <span *ngIf="registerUserForm.get('email')?.errors?.['emailPatternDismatch']">Email Pattern is not
+                matched</span>
+              <span *ngIf="registerUserForm.get('email')?.errors?.['forbbidenEmail']">Email value is not
+                permitted</span>
             </small>
           </div>
           <div class="row mb-3">
             <div class="col-md-12 d-flex gap-3" formGroupName="address">
               <div class="col-md-6">
                 <label for="inputStreet" class="form-label">Street</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="inputStreet"
-                  formControlName="street"
-                />
+                <input type="text" class="form-control" id="inputStreet" formControlName="street" />
               </div>
               <div class="col-md-6">
                 <label for="inputCity" class="form-label">City</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="inputCity"
-                  formControlName="city"
-                />
+                <input type="text" class="form-control" id="inputCity" formControlName="city" />
               </div>
             </div>
             <small class="text-danger" *ngIf="addressIsNotValid()">
@@ -163,28 +93,20 @@
             </div>
 
             <div formArrayName="hobbies">
-              <div
-                class="form-group"
-                *ngFor="let hobbyField of hobbies().controls; let i = index"
-              >
+              <div class="form-group" *ngFor="let hobbyField of hobbies().controls; let i = index">
                 <input class="form-control" [formControlName]="i" type="text" />
               </div>
             </div>
           </div>
           <hr />
-          <div class="col-md-12">
-            <button
-              [disabled]="!registerUserForm.valid"
-              type="submit"
-              (click)="submitForm()"
-              class="btn btn-primary"
-            >
+          <div class="gap-2 d-grid ">
+            <button [disabled]="!registerUserForm.valid" type="submit" (click)="submitForm()" class="btn btn-primary">
               Register
             </button>
-            <button class="btn btn-info mx-2" (click)="setFormFieldValue()">
+            <button class="btn btn-info" (click)="setFormFieldValue()">
               update formField value
             </button>
-            <button class="btn btn-danger mx-2" (click)="setFormValue()">
+            <button class="btn btn-danger" (click)="setFormValue()">
               set Form value
             </button>
           </div>

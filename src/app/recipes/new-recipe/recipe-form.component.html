@@ -5,68 +5,30 @@
         <h4>Register new recipe</h4>
         <form #formRef="ngForm" (ngSubmit)="submitForm(formRef)">
           <div class="row mb-3">
-            <label for="inputEmail3" class="col-sm-2 col-form-label"
-              >Title</label
-            >
-            <div class="col-sm-10">
-              <input
-                ngModel
-                name="title"
-                type="text"
-                class="form-control"
-                id="inputTitle"
-                #title="ngModel"
-                required
-              />
+            <label for="inputEmail3" class="col-sm-12 col-form-label">Title</label>
+            <div class="col-sm-12">
+              <input ngModel name="title" type="text" class="form-control" id="inputTitle" #title="ngModel" required />
             </div>
-            <small *ngIf="!title.valid && title.touched" class="text-danger"
-              >title is required!</small
-            >
+            <small *ngIf="!title.valid && title.touched" class="text-danger">title is required!</small>
           </div>
           <div class="row mb-3">
-            <label for="inputDescription" class="col-sm-2 col-form-label"
-              >Description</label
-            >
-            <div class="col-sm-10">
-              <textarea
-                col="30"
-                ngModel
-                name="description"
-                type="text"
-                class="form-control"
-                id="inputTitle"
-                #description="ngModel"
-                required
-              >
+            <label for="inputDescription" class="col-sm-12 col-form-label">Description</label>
+            <div class="col-sm-12">
+              <textarea col="30" ngModel name="description" type="text" class="form-control" id="inputTitle"
+                #description="ngModel" required>
               </textarea>
             </div>
           </div>
           <div class="row mb-3">
-            <label for="inputImageUrl" class="col-sm-2 col-form-label"
-              >Upload image url</label
-            >
-            <div class="col-sm-10">
-              <input
-                ngModel
-                name="imageSrc"
-                #imageSrc="ngModel"
-                class="form-control"
-                type="text"
-                id="formFile"
-              />
+            <label for="inputImageUrl" class="col-sm-12 col-form-label">Upload image url</label>
+            <div class="col-sm-12">
+              <input ngModel name="imageSrc" #imageSrc="ngModel" class="form-control" type="text" id="formFile" />
             </div>
-            <small
-              class="text-danger"
-              *ngIf="!imageSrc.valid && imageSrc.touched"
-            >
+            <small class="text-danger" *ngIf="!imageSrc.valid && imageSrc.touched">
               Please add your image url
             </small>
           </div>
-          <button
-            [disabled]="!formRef.valid"
-            type="submit"
-            class="btn btn-sm btn-primary"
-          >
+          <button [disabled]="!formRef.valid" type="submit" class="btn btn-sm btn-primary">
             Create Recipe
           </button>
           <button (click)="resetForm()" class="btn mx-2 btn-sm btn-danger">

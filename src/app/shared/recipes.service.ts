@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.shared.service';
 import { HttpClient } from '@angular/common/http';
 import { SupbaseService } from './supabase.service';
-import { from, map, catchError, throwError } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
+import { catchError, from, map, throwError } from 'rxjs';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root',
 })
@@ -16,20 +16,26 @@ export class RecipeService {
     private supabaseService: SupbaseService,
     private apiService: ApiService,
     private http: HttpClient
-  ) {}
+  ) { }
   getRecipes() {
-    const data$ = from(
+    return from(
       this.supabaseService.supabase.from('recipe').select('*')
     ).pipe(
-      map((response) => {
-        console.log('respo', response);
+      map(response => {
         if (response.error) {
-          throw new Error(response.error.message);
+          throw new Error("something went wrong")
         }
-        return response.data;
-      })
-    );
-    return data$;
+        return response.data
+      }),
+      catchError(response => {
+        let error = "An unknown error happened";
+        console.warn("error", response)
+        if (response.error.message) {
+          return throwError(() => { new Error(error) })
+        }
+        return throwError(() => { new Error(error) })
+      }),
+    )
   }
 
   getRecipeInformation(recipeId: number) {

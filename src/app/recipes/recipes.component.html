@@ -1,35 +1,22 @@
 <div class="col-md-12">
   <div class="row p-2">
     <div class="col-md-12">
-      <input
-        placeholder="recipe"
-        [(ngModel)]="filterText"
-        type="text"
-        class="form-control"
-      />
+      <input placeholder="recipe" [(ngModel)]="filterText" type="text" class="form-control" />
     </div>
     <strong class="text-center" *ngIf="loading"> loading... </strong>
     <ng-container *ngIf="recipes.length && !loading">
-      <div
-        *ngFor="let recipe of recipes | filter : filterText : 'title'"
-        class="col-md-3 my-2"
-      >
-        <app-recipe
-          [title]="recipe.title"
-          [id]="recipe.id"
-          [image]="recipe.imageSrc"
-          [description]="recipe.description"
-          [date]="recipe.date"
-        ></app-recipe>
+      <div *ngFor="let recipe of recipes | filter : filterText : 'title'" class="col-md-3 my-2">
+        <app-recipe [title]="recipe.title" [id]="recipe.id" [image]="recipe.imageSrc" [description]="recipe.description"
+          [date]="recipe.date"></app-recipe>
       </div>
     </ng-container>
-    <div *ngIf="!loading && recipes.length === 0">
+    <div *ngIf="!loading && recipes.length === 0 && !error">
       <div class="col-md-12">
         <p class="text-center p-4 text-bold">Not found any items</p>
       </div>
     </div>
     <div *ngIf="error">
-      <div class="col-md-12">
+      <div class="col-md-12 mt-4">
         <div class="alert alert-danger" role="alert">
           <h2>Something went wrong!</h2>
           <p>{{ error }}</p>
